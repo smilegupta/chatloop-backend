@@ -1,0 +1,70 @@
+type Users @model @key(fields: ["userId", "name"]) {
+  userId: ID!
+  name: String!
+  profileImage: String
+  theme: Int
+  wallpaper: String
+  conversations: [UserConversations] @connection(fields: ["userId"])
+}
+
+type ChatRooms @model @key(fields: ["chatRoomId", "name"]) {
+  chatRoomId: ID!
+  name: String!
+  description: String
+  usersCount: Int
+  theme: String
+  createdBy: ID!
+  chatRoomImage: String
+}
+
+type UserConversations @model
+#@key(fields: ["userId", "lastMessageAt"])
+#@key(name: "UserConversationIndex", fields: ["userId", "conversationName"], queryField: "searchConversations")
+#@key(name: "conversationId", fields: ["conversationId"], queryField: "getByConversationId") {
+@key(fields: ["userId", "conversationName"]) {
+  userId: ID!
+  lastMessageAt: AWSDateTime!
+  conversationType: ConversationType
+  conversationName: String!
+  conversationImage: String!
+  conversationId: ID!
+  lastMessage: String!
+  description: String
+}
+
+type Messages @model @key(fields: ["conversationId", "sentAt"]) {
+  conversationId: ID!
+  sentAt: AWSDateTime!
+  messageId: ID!
+  message: String!
+  authorId: ID!
+  authorName: String!
+  refMessageId: ID
+  refMessage: String
+  conversationName: String!
+}
+
+type Mutation {
+  sendMessage(
+    conversationId: ID!,
+    sentAt: AWSDateTime!,
+    message: String,
+    authorId: ID!,
+    authorName: String!,
+    conversationImage: String!,
+    conversationType: ConversationType!
+    conversationName: String
+    description: String
+  ): Messages @function(name: "sendMessage-${env}")
+}
+
+type Subscription {
+  #  Subscribes to all new messages in a given Conversation.
+  subscribeToNewMessage(conversationId: ID!): Messages
+  @aws_subscribe(mutations:["sendMessage"])
+}
+
+enum ConversationType {
+  chatRoom
+  personal
+}

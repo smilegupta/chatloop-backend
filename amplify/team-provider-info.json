@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-serverlesschatapp-dev-232541-authRole",
+      "UnauthRoleArn": "arn:aws:iam::318066470757:role/amplify-serverlesschatapp-dev-232541-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::318066470757:role/amplify-serverlesschatapp-dev-232541-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-serverlesschatapp-dev-232541-deployment",
+      "UnauthRoleName": "amplify-serverlesschatapp-dev-232541-unauthRole",
+      "StackName": "amplify-serverlesschatapp-dev-232541",
+      "StackId": "arn:aws:cloudformation:ap-south-1:318066470757:stack/amplify-serverlesschatapp-dev-232541/caa04820-ac38-11eb-abdf-02ffd0944318",
+      "AmplifyAppId": "d1ttvk79hm3njd"
+    },
+    "categories": {
+      "function": {
+        "sendMessage": {
+          "deploymentBucketName": "amplify-serverlesschatapp-dev-232541-deployment",
+          "s3Key": "amplify-builds/sendMessage-6e327577777736414e36-build.zip"
+        }
+      }
+    }
+  }
+}
